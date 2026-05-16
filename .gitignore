@@ -5,4 +5,6 @@ experiments/
 .DS_Store
 __pycache__/
 *.pyc
+.pycache_tmp/
+.matplotlib_cache/
 .ipynb_checkpoints/

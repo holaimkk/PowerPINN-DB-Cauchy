@@ -224,9 +224,67 @@ PowerPINN-DB-Cauchy/
 
 ---
 
-## 7. 当前状态
+## 7. 当前最小可运行实验：Toy PINN
 
-当前处于 **阶段 0：项目协作框架搭建**。
+阶段 2 的最小 PINN 示例用于验证配置系统、训练循环、日志、指标和图表输出是否可用。当前 toy 问题为：
+
+```text
+u'(t) = -u(t), u(0) = 1
+精确解：u(t) = exp(-t)
+```
+
+### 7.1 安装依赖
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+也可以使用 Conda：
+
+```bash
+conda env create -f environment.yml
+conda activate powerpinn-db-cauchy
+```
+
+### 7.2 运行 Toy PINN
+
+```bash
+python3 scripts/run_toy_pinn.py --config configs/toy_pinn.yaml
+```
+
+运行后会生成：
+
+```text
+experiments/EXP-001/
+├── config.yaml
+├── metrics.csv
+├── loss_history.csv
+├── train.log
+├── predictions.csv
+├── model.pt
+├── figures/
+│   ├── loss_curve.png
+│   └── prediction_vs_truth.png
+└── README.md
+```
+
+说明：`experiments/` 默认不提交到 Git。实验结果需要手动登记到飞书实验记录表中。
+
+### 7.3 后续 PowerPINN Baseline 入口规划
+
+PowerPINN baseline 尚未实现。建议后续保持同样的配置驱动方式，例如：
+
+```bash
+python3 scripts/run_powerpinn_baseline.py --config configs/powerpinn_baseline.yaml
+```
+
+在完成 PowerPINN 论文公式拆解、变量定义和数据来源确认前，不应直接加入 Cauchy、DB-PINN、ConFIG 或 PI-KAN 模块。
+
+---
+
+## 8. 当前状态
+
+当前处于 **阶段 1 文献拆解 + 阶段 2 最小 PINN 示例验证**。
 
 已完成：
 
@@ -234,10 +292,12 @@ PowerPINN-DB-Cauchy/
 - 基础目录结构创建；
 - 飞书实验记录表创建；
 - README 与阅读模板初步整理。
+- Toy PINN 最小示例框架已建立；
+- `EXP-001` 已在本机 CPU 上真实运行并生成完整实验输出。
 
 下一步：
 
 1. 完成 5 篇核心论文阅读卡片；
 2. 确认 PowerPINN 代码入口与 9 阶同步发电机模型脚本；
-3. 跑通一个最小 PINN 示例；
-4. 制定 PowerPINN baseline 复现清单。
+3. 制定 PowerPINN baseline 复现清单；
+4. 在不引入 Cauchy/DB 的前提下实现 PowerPINN baseline。

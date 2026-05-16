@@ -1,0 +1,36 @@
+experiment:
+  id: EXP-001
+  name: toy_ode_pinn
+  output_root: experiments
+  overwrite: true
+
+seed: 42
+device:
+  prefer: auto
+
+problem:
+  name: exponential_decay_ode
+  t_min: 0.0
+  t_max: 1.0
+  n_collocation: 100
+  n_eval: 200
+  initial_t: 0.0
+  initial_u: 1.0
+
+model:
+  type: mlp
+  input_dim: 1
+  output_dim: 1
+  hidden_dim: 32
+  num_hidden_layers: 3
+  activation: tanh
+
+loss:
+  physics_weight: 1.0
+  initial_condition_weight: 1.0
+
+training:
+  optimizer: adam
+  epochs: 2000
+  learning_rate: 0.001
+  log_every: 100

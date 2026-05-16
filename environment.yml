@@ -1,0 +1,15 @@
+name: powerpinn-db-cauchy
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - pyyaml
+  - matplotlib
+  - pytorch
+  - pytest
+  - pip:
+      - -r requirements.txt
